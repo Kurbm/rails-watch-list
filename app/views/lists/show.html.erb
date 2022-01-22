@@ -12,13 +12,13 @@
           <div class="card-movie">
             <img src="<%= bookmark.movie.poster_url %>" />
             <div class="card-movie-description">
-              <div>
-                <h2><%= bookmark.movie.title %></h2>
+              <div class="align-middle">
+                <h2><%= bookmark.movie.title %><span> <i class="fas fa-circle" style="font-size: 8px"></i> <%= bookmark.movie.rating %> <i class="fas fa-star"></i></span></h2>
                 <p><%= bookmark.movie.overview %></p>
               </div>
               <div class="card-movie-infos mt-3 align-items-center">
                 <div class="d-flex align-items-center"><i class="fas fa-quote-left"></i><p class="card-movie-comment ml-2"><%= bookmark.comment %></p></div>
-                <%= link_to 'delete', list_path(@list), class: 'text-danger card-movie-comment' %>
+                <%= link_to 'delete', bookmark_path(bookmark), class: 'text-danger card-movie-comment', method: :delete, data: { confirm: "Are you sure?" }%>
               </div>
             </div>
           </div>
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="col-12 col-md-4">
-      <%= link_to 'Create a movie list', new_list_path, class: 'btn btn-success' %>
+      <%= link_to 'Add a new movie', new_list_bookmark_path(@list), class: 'btn btn-success' %>
     </div>
   </div>
 </div>
