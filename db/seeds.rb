@@ -17,8 +17,8 @@ movies_results = movies["results"]
 movies_results.each do | movie |
   movies_title = movie["title"]
   movies_overview = movie["overview"]
-  movies_poster = "https://image.tmdb.org/t/p/original#{movie["title"]}"
+  movies_poster = "https://image.tmdb.org/t/p/original#{movie["poster_path"]}"
   movies_rating = movie["vote_average"]
-  Movie.create(title: movies_title, overview: movies_overview, poster_url: movies_poster, rating: movies_rating)
+  Movie.update(title: movies_title, overview: movies_overview, poster_url: movies_poster, rating: movies_rating)
 end
 puts "finished"
