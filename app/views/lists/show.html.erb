@@ -1,4 +1,4 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= @list.image %>);">
   <div class="container text-center">
     <h1><%= @list.name %></h1>
   </div>
@@ -25,8 +25,8 @@
         <% end %>
       </div>
     </div>
-    <div class="col-12 col-md-4">
-      <%= link_to 'Add a new movie', new_list_bookmark_path(@list), class: 'btn btn-success' %>
+    <div class="col-12 col-md-4 mt-5 mt-md-0">
+      <%= link_to 'Add a new movie', new_list_bookmark_path(@list), class: 'cta cta-light' %>
     </div>
   </div>
 </div>
@@ -41,9 +41,11 @@
     </div>
     <div class="col-12 col-md-6">
       <%= simple_form_for [@list, @review] do |f| %>
-      <%= f.input :rating %>
+      <%= f.collection_radio_buttons :rating, [[1], [2], [3], [4], [5]], :first, :last, item_wrapper_tag: false, boolean_style: :inline do |b| %>
+        <%= b.radio_button + b.label %>
+      <% end %>
       <%= f.input :content %>
-      <%= f.submit class: 'btn btn-primary' %>
+      <%= f.submit class: 'cta cta-light' %>
       <% end %>
     </div>
   </div>
