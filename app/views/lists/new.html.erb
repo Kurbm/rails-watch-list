@@ -9,7 +9,7 @@
       <div class="form-container">
         <%= simple_form_for @list do |f| %>
         <%= f.input :name %>
-        <%= f.input :image %>
+        <%= f.input :photo, as: :file %>
         <%= f.submit class: 'btn btn-primary' %>
         <% end %>
       </div>

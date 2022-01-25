@@ -21,6 +21,14 @@ class ListsController < ApplicationController
     @review = Review.new
   end
 
+  def destroy
+    @list = List.find(params[:id])
+    @list.destroy
+
+    redirect_to lists_path
+  end
+
+
   private
 
   def set_list
@@ -28,6 +36,6 @@ class ListsController < ApplicationController
   end
 
   def list_params
-    params.require(:list).permit(:name, :image)
+    params.require(:list).permit(:name, :photo)
   end
 end

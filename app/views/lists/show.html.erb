@@ -1,4 +1,4 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= @list.image %>);">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= cl_image_path @list.photo.key, default_image: 'sample.jpg' %>);">
   <div class="container text-center">
     <h1><%= @list.name %></h1>
   </div>
@@ -27,6 +27,7 @@
     </div>
     <div class="col-12 col-md-4 mt-5 mt-md-0">
       <%= link_to 'Add a new movie', new_list_bookmark_path(@list), class: 'cta cta-light' %>
+      <%= link_to 'Delete list', list_path(@list), method: :delete, class: 'cta cta-light', data: { confirm: "Are you sure?" } %>
     </div>
   </div>
 </div>
