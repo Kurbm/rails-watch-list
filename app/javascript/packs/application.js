@@ -15,7 +15,9 @@ ActiveStorage.start()
 import 'bootstrap';
 
 import { initSelect2 } from '../components/init_select2';
+import { reviewsToggle } from '../components/reviews';
 
 document.addEventListener("turbolinks:load", function() {
   initSelect2();
+  reviewsToggle();
 });

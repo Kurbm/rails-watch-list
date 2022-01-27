@@ -9,4 +9,19 @@
     font-size: 16px;
     font-weight: 500;
   }
+
+}
+
+.review-form-container {
+  padding: 0px 40px 16px 40px;
+  z-index: 1;
+  border-radius: 4px;
+
+  label {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  input[type="radio"] {
+    -webkit-appearance: none;
+  }
 }

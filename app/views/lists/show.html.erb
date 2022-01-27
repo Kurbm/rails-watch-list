@@ -16,11 +16,12 @@
                 <h2><%= bookmark.movie.title %><span> <i class="fas fa-circle" style="font-size: 8px"></i> <%= bookmark.movie.rating %> <i class="fas fa-star"></i></span></h2>
                 <p><%= bookmark.movie.overview %></p>
               </div>
-              <div class="card-movie-infos mt-3 align-items-center">
+
+            </div>
+                          <div class="card-movie-infos mt-3 align-items-center">
                 <div class="d-flex align-items-center"><i class="fas fa-quote-left"></i><p class="card-movie-comment ml-2"><%= bookmark.comment %></p></div>
                 <%= link_to 'delete', bookmark_path(bookmark), class: 'text-danger card-movie-comment', method: :delete, data: { confirm: "Are you sure?" }%>
               </div>
-            </div>
           </div>
         <% end %>
       </div>
@@ -33,21 +34,60 @@
 </div>
 
 <div class="container">
-  <div class="row">
+  <div class="row align-items-start">
     <div class="col-12 col-md-6">
     <% @list.reviews.each do |review| %>
-    <p><%= review.rating %></p>
+    <% if review.rating == 1 %>
+    <div class="d-flex justify-content-between">
+      <div class="inline-block">
+        <p><% 1.times do%><i class="fas fa-star" ></i><% end %><% 4.times do%><i class="far fa-star" ></i><% end %> <%= review.rating %></p>
+      </div>
+      <span><%= review.created_at.strftime("%d.%m.%Y")%></span>
+    </div>
+    <% elsif review.rating == 2 %>
+    <div class="d-flex justify-content-between">
+      <div class="inline-block">
+        <p><% 2.times do%><i class="fas fa-star" ></i><% end %><% 3.times do%><i class="far fa-star" ></i><% end %> <%= review.rating %></p>
+      </div>
+      <span><%= review.created_at.strftime("%d.%m.%Y")%></span>
+    </div>
+    <% elsif review.rating == 3 %>
+    <div class="d-flex justify-content-between">
+      <div class="inline-block">
+        <p><% 3.times do%><i class="fas fa-star" ></i><% end %><% 2.times do%><i class="far fa-star" ></i><% end %> <%= review.rating %></p>
+      </div>
+      <span><%= review.created_at.strftime("%d.%m.%Y")%></span>
+    </div>
+    <% elsif review.rating == 4 %>
+    <div class="d-flex justify-content-between">
+      <div class="inline-block">
+        <p><% 4.times do%><i class="fas fa-star" ></i><% end %><% 1.times do%><i class="far fa-star" ></i><% end %> <%= review.rating %></p>
+      </div>
+      <span><%= review.created_at.strftime("%d.%m.%Y")%></span>
+    </div>
+    <% else %>
+    <div class="d-flex justify-content-between">
+      <div class="inline-block">
+        <p><% 5.times do%><i class="fas fa-star" ></i><% end %> <%= review.rating %></p>
+      </div>
+      <span><%= review.created_at.strftime("%d.%m.%Y")%></span>
+    </div>
+    <% end %>
     <p><%= review.content %></p>
+    <hr>
     <% end %>
     </div>
     <div class="col-12 col-md-6">
+    <div class="review-form-container">
       <%= simple_form_for [@list, @review] do |f| %>
-      <%= f.collection_radio_buttons :rating, [[1], [2], [3], [4], [5]], :first, :last, item_wrapper_tag: false, boolean_style: :inline do |b| %>
-        <%= b.radio_button + b.label %>
+      <%= f.collection_radio_buttons :rating , [[1], [2], [3], [4], [5]], :first, :last, item_wrapper_tag: false, boolean_style: :inline do |b| %>
+       <%= b.radio_button class: "review-input"%>
+        <%= b.label do %><i class="far fa-star" ></i><%end%>
       <% end %>
       <%= f.input :content %>
       <%= f.submit class: 'cta cta-light' %>
       <% end %>
+    </div>
     </div>
   </div>
 </div>
