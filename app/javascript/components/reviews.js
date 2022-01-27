@@ -1,6 +1,6 @@
 const reviews = document.querySelectorAll('.far.fa-star')
 
-$(".fa-star").hover(function() {
+const reviewsToggle = $(".fa-star").hover(function() {
     $(this).addClass("fas");
     $(this).removeClass("far");
     $(this).siblings().addClass("fas");
