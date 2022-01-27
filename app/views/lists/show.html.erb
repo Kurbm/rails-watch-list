@@ -37,42 +37,13 @@
   <div class="row align-items-start">
     <div class="col-12 col-md-6">
     <% @list.reviews.each do |review| %>
-    <% if review.rating == 1 %>
     <div class="d-flex justify-content-between">
       <div class="inline-block">
-        <p><% 1.times do%><i class="fas fa-star" ></i><% end %><% 4.times do%><i class="far fa-star" ></i><% end %> <%= review.rating %></p>
+      <% negative_reviews = 5 - review.rating %>
+        <p><% review.rating.times do%><i class="fas fa-star" ></i><% end %><% negative_reviews.times do%><i class="far fa-star" ></i><% end %> <%= review.rating %></p>
       </div>
       <span><%= review.created_at.strftime("%d.%m.%Y")%></span>
     </div>
-    <% elsif review.rating == 2 %>
-    <div class="d-flex justify-content-between">
-      <div class="inline-block">
-        <p><% 2.times do%><i class="fas fa-star" ></i><% end %><% 3.times do%><i class="far fa-star" ></i><% end %> <%= review.rating %></p>
-      </div>
-      <span><%= review.created_at.strftime("%d.%m.%Y")%></span>
-    </div>
-    <% elsif review.rating == 3 %>
-    <div class="d-flex justify-content-between">
-      <div class="inline-block">
-        <p><% 3.times do%><i class="fas fa-star" ></i><% end %><% 2.times do%><i class="far fa-star" ></i><% end %> <%= review.rating %></p>
-      </div>
-      <span><%= review.created_at.strftime("%d.%m.%Y")%></span>
-    </div>
-    <% elsif review.rating == 4 %>
-    <div class="d-flex justify-content-between">
-      <div class="inline-block">
-        <p><% 4.times do%><i class="fas fa-star" ></i><% end %><% 1.times do%><i class="far fa-star" ></i><% end %> <%= review.rating %></p>
-      </div>
-      <span><%= review.created_at.strftime("%d.%m.%Y")%></span>
-    </div>
-    <% else %>
-    <div class="d-flex justify-content-between">
-      <div class="inline-block">
-        <p><% 5.times do%><i class="fas fa-star" ></i><% end %> <%= review.rating %></p>
-      </div>
-      <span><%= review.created_at.strftime("%d.%m.%Y")%></span>
-    </div>
-    <% end %>
     <p><%= review.content %></p>
     <hr>
     <% end %>
@@ -80,10 +51,11 @@
     <div class="col-12 col-md-6">
     <div class="review-form-container">
       <%= simple_form_for [@list, @review] do |f| %>
-      <%= f.collection_radio_buttons :rating , [[1], [2], [3], [4], [5]], :first, :last, item_wrapper_tag: false, boolean_style: :inline do |b| %>
-       <%= b.radio_button class: "review-input"%>
-        <%= b.label do %><i class="far fa-star" ></i><%end%>
-      <% end %>
+      <div class="stars">
+        <%= f.collection_radio_buttons :rating, [[5], [4], [3], [2], [1]], :first, :last, item_wrapper_tag: false, boolean_style: :inline do |b| %>
+          <%= b.radio_button %><%=b.label class: "star star-#{b.value}"%>
+        <% end %>
+      </div>
       <%= f.input :content %>
       <%= f.submit class: 'cta cta-light' %>
       <% end %>

@@ -8,7 +8,7 @@
     <div class="col-12 col-md-6">
       <div class="form-container">
         <%= simple_form_for [@list, @bookmark] do |f| %>
-        <%= f.association :movie, collection: @movies, input_html: { class: 'select2' }   %>
+        <%= f.association :movie, collection: Movie.all.order(:title), prompt: 'Select a movie', input_html: { class: 'select2' }   %>
         <%= f.input :comment %>
         <%= f.submit class: 'btn btn-primary' %>
         <% end %>
